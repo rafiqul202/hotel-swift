@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// A Guide to Building an API Server with Nextjs 14, Mongoose, and Cypress
+
 const MONGO_URI = process.env.MONGO_URI;
 const cached = {};
 async function connectMongo() {
@@ -10,7 +12,7 @@ async function connectMongo() {
   }
   if (cached.connection) {
     return cached.connection;
-    console.log('cached the connect successfully connect')
+    console.log("cached the connect successfully connect");
   }
   if (!cached.promise) {
     const opts = {
@@ -20,10 +22,10 @@ async function connectMongo() {
   }
   try {
     cached.connection = await cached.promise;
-    console.log("connection successfully connect")
+    console.log("connection successfully connect");
   } catch (e) {
     cached.promise = undefined;
-    console.log('not connect mongodb database ')
+    console.log("not connect mongodb database ");
     throw e;
   }
   return cached.connection;
