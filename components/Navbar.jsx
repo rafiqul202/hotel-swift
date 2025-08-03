@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import Link from "next/link";
-import { use } from "react";
+import LogOut from "./auth/LogOut";
 
 const Navbar = async ({ sideMenu }) => {
   const user = await auth();
@@ -29,7 +29,15 @@ const Navbar = async ({ sideMenu }) => {
           </li>
           {user?.user?.name && <p className="font-bold">{user?.user?.name}</p>}
 
-          <li>Login</li>
+          <li>
+            {user?.user ? (
+              <LogOut />
+            ) : (
+              <Link href={"/login"} className="login">
+                Log In
+              </Link>
+            )}
+          </li>
         </ul>
       )}
     </nav>
