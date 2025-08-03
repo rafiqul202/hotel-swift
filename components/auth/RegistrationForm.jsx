@@ -1,6 +1,42 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 const RegistrationForm = () => {
+  const [error, setError] = useState("");
+  const router = useRouter(); 
+  const handelRegister = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.currentTarget);
+      const fname = formData.get('fname')
+      const lname = formData.get('lname')
+      const email = formData.get('email')
+      const password = formData.get('password')
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          fname,
+          lname,
+          email,
+          password
+        })
+      });
+      res.status === 201 && router.push("/login")
+    } catch (error) {
+      setError(error?.message)
+    }
+}
   return (
-    <form className="login-form">
+    <>
+      {
+        error && (<div className="text-lg font-semibold text-red-500 text-center">{ error}</div>)
+    }
+    <form className="login-form" onSubmit={handelRegister}>
       <div>
         <label htmlFor="fname">First Name</label>
         <input type="text" name="fname" id="fname" />
@@ -25,6 +61,7 @@ const RegistrationForm = () => {
         Create account
       </button>
     </form>
+    </>
   );
 };
 
