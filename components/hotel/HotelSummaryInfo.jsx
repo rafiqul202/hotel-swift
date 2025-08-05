@@ -2,7 +2,13 @@ import Link from "next/link";
 import HotelRating from "./HotelRating";
 import HotelReview from "./HotelReview";
 
-const HotelSummaryInfo = ({ fromListPage, info }) => {
+const HotelSummaryInfo = ({ fromListPage, info, checkin, checkout }) => {
+  console.log("hotel checkin cheeckout",checkin,checkout);
+  
+  let params = "";
+  if (checkin && checkout) {
+    params = `?checkin=${checkin}&checkout=${checkout}`;
+  }
   return (
     <>
       <div className={fromListPage ? "flex-1" : "flex-1 container"}>
@@ -19,6 +25,13 @@ const HotelSummaryInfo = ({ fromListPage, info }) => {
         <span className="bg-yellow-300 p-1 rounded-lg">
           {info?.propertyCategory} Star Property
         </span>
+        <span>
+          {info?.isBooked && (
+            <span className="ml-2 bg-red-400 py-1.5 px-3.5 rounded-lg">
+              Sold OUt{" "}
+            </span>
+          )}
+        </span>
       </div>
 
       <div className="flex flex-col gap-2 items-end justify-center">
@@ -27,11 +40,19 @@ const HotelSummaryInfo = ({ fromListPage, info }) => {
         </h2>
         <p className=" text-right">Per Night for 1 Rooms</p>
         {fromListPage ? (
-          <Link href={`/hotels/${info?.id}`} className="btn-primary ">
+          <Link href={`/hotels/${info?.id}${params}`} className="btn-primary ">
             Details
           </Link>
         ) : (
-          <button className="btn-primary ">Book</button>
+          <Link
+            href={{
+              pathname: `/hotels/${info?.id}/payment`,
+              query: `checkin=${checkin}&checkout=${checkout}`,
+            }}
+            className={`${info?.isBooked ? "btn-disabled" : "btn-primary "}`}
+          >
+            Book
+          </Link>
         )}
       </div>
     </>

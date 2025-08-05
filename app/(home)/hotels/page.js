@@ -7,13 +7,22 @@ const HotelListPage = ({ searchParams: { destination ,checkin,checkout} }) => {
     <>
       <section className="bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center pt-[100px] pb-[60px]">
         <div className="container items-center py-12 ">
-          <Search fromList={true} destination={destination} checkin ={checkin} checkout={checkout} />
+          <Search
+            fromList={true}
+            destination={destination}
+            checkin={checkin}
+            checkout={checkout}
+          />
         </div>
       </section>
       <section className="py-12">
         <div className="container grid grid-cols-12">
           <Filter />
-          <HotelList />
+          <HotelList
+            destination={destination}
+            checkin={checkin}
+            checkout={checkout}
+          />
         </div>
       </section>
     </>

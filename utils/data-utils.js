@@ -14,4 +14,9 @@ const replaceMongoIdInObject = (object) => {
 
 }
 
-export {replaceMongoIdInArray , replaceMongoIdInObject}
+const isDateInBetween = (data, from, to) => {
+return (new Date(data).getTime() >= new Date(from).getTime() && new Date(data).getTime() <= new Date(to).getTime())
+  
+}
+
+export {replaceMongoIdInArray , replaceMongoIdInObject , isDateInBetween}

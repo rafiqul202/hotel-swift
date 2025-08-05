@@ -50,6 +50,9 @@
   .imageshowCase {
     @apply h-[400px];
   }
+  .btn-disabled {
+    @apply bg-gray-500 px-8 py-2 rounded-md block text-white font-bold shadow-lg cursor-not-allowed;
+  }
 
   .imageshowCase img {
     @apply h-full min-h-full w-full min-w-full object-cover;
@@ -68,6 +71,9 @@
   }
 
   input[type="checkbox"] {
-    @apply mx-1
+    @apply mx-1;
+  }
+  button:disabled {
+    @apply bg-gray-500 cursor-default;
   }
 }
