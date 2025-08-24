@@ -19,4 +19,12 @@ return (new Date(data).getTime() >= new Date(from).getTime() && new Date(data).g
   
 }
 
+export const getDayDifference = (from, to) => {
+  return (
+    (new Date(to).getTime() - new Date(from).getTime()) /
+      (24 * 60 * 60 * 1000) +
+    1
+  );
+};
+
 export {replaceMongoIdInArray , replaceMongoIdInObject , isDateInBetween}
