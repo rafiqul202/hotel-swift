@@ -1,23 +1,26 @@
 const replaceMongoIdInArray = (array) => {
-  const mappedArray = array.map((item) => {
-    return {
-      id: item._id.toString(),
-      ...item
-    }
-  }).map(({ _id, ...rest }) => rest);
-  return mappedArray
-}
+  const mappedArray = array
+    .map((item) => {
+      return {
+        id: item._id.toString(),
+        ...item,
+      };
+    })
+    .map(({ _id, ...rest }) => rest);
+  return mappedArray;
+};
 
-const replaceMongoIdInObject = (object) => {
-  const { _id, ...updatedObject } = { ...object, id: object._id.toString() };
-  return updatedObject;
-
-}
+export const replaceMongoIdInObject = (obj) => {
+  const { _id, ...updatedObj } = { ...obj, id: obj?._id.toString() };
+  return updatedObj;
+};
 
 const isDateInBetween = (data, from, to) => {
-return (new Date(data).getTime() >= new Date(from).getTime() && new Date(data).getTime() <= new Date(to).getTime())
-  
-}
+  return (
+    new Date(data).getTime() >= new Date(from).getTime() &&
+    new Date(data).getTime() <= new Date(to).getTime()
+  );
+};
 
 export const getDayDifference = (from, to) => {
   return (
@@ -27,4 +30,4 @@ export const getDayDifference = (from, to) => {
   );
 };
 
-export {replaceMongoIdInArray , replaceMongoIdInObject , isDateInBetween}
+export { replaceMongoIdInArray, isDateInBetween };
